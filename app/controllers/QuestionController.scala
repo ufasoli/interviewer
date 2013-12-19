@@ -36,7 +36,13 @@ object QuestionController extends Controller {
       val question = rs.request.body.validate[Question]
 
       question match {
-        case JsSuccess(_,_) => Ok(Json.toJson(new SimpleResponse("Ok")))
+
+        case JsSuccess(_, _) =>
+
+          val questionId = Questions.autoInc.insert(question.get)
+          Ok(Json.toJson(new SimpleResponse(s"question [$questionId] was successfully created")))
+
+
         case JsError(_) => BadRequest(Json.toJson(new SimpleResponse(s"Unable to parse body. error : [$question]")))
         case _ => InternalServerError(Json.toJson(new SimpleResponse(s"unknown error")))
       }
