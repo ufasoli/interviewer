@@ -3,7 +3,12 @@
 # ~~~~
 
 # Home page
-GET     /                           controllers.Application.index
+GET           /                         controllers.Application.index
 
 # Map static resources from the /public folder to the /assets URL path
-GET     /assets/*file               controllers.Assets.at(path="/public", file)
+GET           /assets/*file             controllers.Assets.at(path="/public", file)
+
+POST          /api/questions            controllers.QuestionController.add
+PUT           /api/questions/:id        controllers.QuestionController.update(id:Long)
+GET           /api/questions            controllers.QuestionController.list
+DELETE        /api/questions/:id        controllers.QuestionController.delete(id:Long)
