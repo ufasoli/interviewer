@@ -11,4 +11,5 @@ GET           /assets/*file             controllers.Assets.at(path="/public", fi
 POST          /api/questions            controllers.QuestionController.add
 PUT           /api/questions/:id        controllers.QuestionController.update(id:Long)
 GET           /api/questions            controllers.QuestionController.list
+GET           /api/questions/:id        controllers.QuestionController.find(id:Long)
 DELETE        /api/questions/:id        controllers.QuestionController.delete(id:Long)

@@ -23,8 +23,14 @@ import play.api.mvc.BodyParsers.parse
  * Time: 13:29
  *
  */
-object QuestionController extends Controller {
+object QuestionController extends  Crud[Question,Questions]  with Controller {
 
+
+  def find(id:Long) = DBAction{
+    implicit rs =>
+
+    Ok(Json.toJson(fetchEntityById(Questions,id)))
+  }
 
   def add = DBAction(parse.json) {
 
@@ -63,6 +69,7 @@ object QuestionController extends Controller {
 
   }
 
+
   def delete(id: Long) = DBAction {
     implicit rs =>
 
@@ -78,10 +85,10 @@ object QuestionController extends Controller {
 
   }
 
-  def list = DBAction {
+  def list = DBAction ({
     implicit rs =>
-      Ok(Json.toJson(Query(Questions).filter(_.id > 0L).list()))
-  }
+      Ok(Json.toJson(fetchAllEntities(Questions)))
+  }  )
 
 
 }
