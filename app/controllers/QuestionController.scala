@@ -26,10 +26,14 @@ import play.api.mvc.BodyParsers.parse
 object QuestionController extends  Crud[Question,Questions]  with Controller {
 
 
-  def find(id:Long) = DBAction{
+  def get(id:Long) = DBAction{
     implicit rs =>
 
-    Ok(Json.toJson(fetchEntityById(Questions,id)))
+
+      //fetchEntityById(Questions,id).map(entity => Ok(Json.toJson(entity))).getOrElse(BadRequest)
+
+     // Ok(Json.toJson(fetchEntityById(Questions,id).get))
+       NotImplemented
   }
 
   def add = DBAction(parse.json) {

@@ -17,14 +17,21 @@ import models.AutoIncrementable
 trait Crud[T <: AnyRef {val id : Option[Long]}, U <: AutoIncrementable[T]]  {
 
 
+  /**
+   * Recovers all the entities of type T
+   * @param table a slick object extending Table
+   * @param session a slick session provided usually by play
+   * @see Table
+   * @return   all the entities of type T
+   */
   def fetchAllEntities(table: U)(implicit session: Session): Seq[T] = {
 
       Query(table).filter(_.id > 0L).list()
   }
 
-  def fetchEntityById(table:U, id:Long)(implicit session:Session):T={
+  def fetchEntityById(table:U, id:Long)(implicit session:Session):Option[T]={
 
-    Query(table).filter(_.id === id).first()
+    Query(table).filter(_.id === id).firstOption()
   }
 
   def deleteEntity(table:U, id:Long)(implicit session:Session)={
