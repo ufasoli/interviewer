@@ -14,7 +14,8 @@ object ApplicationBuild extends Build {
     cache,
     "com.typesafe.play" %% "play-slick" % "0.5.0.8",
     "mysql" % "mysql-connector-java" % "5.1.18",
-    "org.scala-lang" % "scala-compiler" % "2.10.3"
+    "org.scala-lang" % "scala-compiler" % "2.10.3",
+    "com.h2database" % "h2" % "1.3.166"
   )
 
 

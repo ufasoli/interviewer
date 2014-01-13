@@ -82,7 +82,9 @@ object Global extends GlobalSettings {
         if( Query(Questions).filter(_.id > 0L).list.size < 1){
 
           Questions.autoInc.insertAll(
-            new Question(None, "q", "a", 1l, 1l, None, 0, None)
+            new Question(None, "q", "a", 1l, 1l, None, 0, None),
+            new Question(None, "q", "a", 2l, 2l, None, 0, None),
+          new Question(None, "q", "a", 3l, 3l, None, 0, None)
           )
         }
 
