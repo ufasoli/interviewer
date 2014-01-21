@@ -7,6 +7,7 @@ import scala.slick.lifted.Query
 import models.AutoIncrementable
 
 
+
 /**
  * Created with IntelliJ IDEA.
  * User: Ulises Fasoli
@@ -29,10 +30,10 @@ trait Crud[T <: AnyRef {val id : Option[Long]}, U <: AutoIncrementable[T]]  {
       Query(table).filter(_.id > 0L).list()
   }
 
-  /*def fetchEntityById(table:U, id:Long)(implicit session:Session):Option[T]={
+  def fetchEntityById(table:U, id:Long)(implicit session:Session):Option[T]={
 
-    Query(table).filter(_.id === id).firstOption()
-  } */
+    Query(table).filter(_.id === id).firstOption
+  }
 
   def deleteEntity(table:U, id:Long)(implicit session:Session)={
 

@@ -1,14 +1,11 @@
 
 
 
-import anorm.Column
 import models.{Language,Domain,DifficultyLevel,ResponseSatisfactionLevel,Question}
 import play.api._
 import models.models._
 import play.api.db.slick._
 import play.api.Play.current
-import scala.slick.jdbc
-import scala.slick.jdbc.StaticQuery
 import scala.slick.lifted.Query
 
 import play.api.db.slick.Config.driver.simple._
@@ -87,6 +84,8 @@ object Global extends GlobalSettings {
           new Question(None, "q", "a", 3l, 3l, None, 0, None)
           )
         }
+
+
 
 
 

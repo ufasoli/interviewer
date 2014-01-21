@@ -1,8 +1,10 @@
 package util.serializers.json
 
 import play.api.libs.json.Json
-import models.Question
-import util.SimpleResponse
+import models.{InterviewSession, Question}
+import _root_.util.SimpleResponse
+
+
 
 /**
  * Created with IntelliJ IDEA.
@@ -16,4 +18,10 @@ object JsonWritters {
   implicit val questionReads = Json.reads[Question]
   implicit val questionFormats = Json.format[Question]
   implicit val simpleResponseWrites = Json.writes[SimpleResponse]
+  implicit val simpleResponseReads = Json.reads[SimpleResponse]
+
+  implicit val interviewSessionWriter = Json.writes[InterviewSession]
+  implicit val interviewSessionReader = Json.reads[InterviewSession]
+
+
 }
