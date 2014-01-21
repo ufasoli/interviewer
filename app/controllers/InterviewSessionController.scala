@@ -3,13 +3,10 @@ package controllers
 import _root_.util.SimpleResponse
 import play.api.mvc.Controller
 import models._
-import play.api.db.slick.DBAction
 import play.api.Play.current
 import play.api.libs.json._
 import _root_.util.serializers.json.JsonWritters._
 import java.util.Date
-import _root_.models.QuestionMode._
-import play.api.db.slick.Config.driver.simple._
 import play.api.db.slick._
 import models.InterviewSessions
 
@@ -71,17 +68,7 @@ object InterviewSessionController extends Crud[InterviewSession, InterviewSessio
 
 
   def hasErrors(res: Seq[JsResult[Any]]) = {
-    var hasError = false
+         if(res.count(_.isInstanceOf[JsError]) > 0) true else false
 
-    for (result <- res) {
-      if (result.isInstanceOf[JsError]) {
-        //TODO: find a way to break loop in scala
-        hasError = true
-
-      }
-
-    }
-
-    hasError
   }
 }
