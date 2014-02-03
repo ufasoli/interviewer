@@ -55,7 +55,6 @@ object InterviewSessionController extends Crud[InterviewSession, InterviewSessio
           (json \ "maxDifficultyLevelId" ).asOpt[Long],
           Some(SessionStatus.NEW),
           None
-
         )
 
         val interviewSessionId =   InterviewSessions.autoInc.insert(interviewSession)
@@ -67,8 +66,19 @@ object InterviewSessionController extends Crud[InterviewSession, InterviewSessio
   }
 
 
-  def hasErrors(res: Seq[JsResult[Any]]) = {
-         if(res.count(_.isInstanceOf[JsError]) > 0) true else false
+  def next(sessionId:Long) = DBAction{
+    implicit rs =>
+
+      val interviewSession = fetchEntityById(InterviewSessions, sessionId).get
+
+
+      interviewSession
+      NotImplemented
+  }
+
+
+  private def hasErrors(res: Seq[JsResult[Any]]) = {
+         res.count(_.isInstanceOf[JsError]) > 0
 
   }
 }
