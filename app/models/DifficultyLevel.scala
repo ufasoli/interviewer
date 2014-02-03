@@ -18,6 +18,7 @@ case class DifficultyLevel(id:Option[Long], name:String, points:Int, description
 class DifficultyLevels extends Table[DifficultyLevel]("DIFFICULTY_LEVEL") with AutoIncrementable[DifficultyLevel]{
 
 
+
   def name = column[String]("NAME")
   def points = column[Int]("POINTS")
   def description = column[String]("DESCRIPTION", O.Nullable)

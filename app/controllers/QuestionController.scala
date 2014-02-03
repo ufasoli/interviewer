@@ -23,12 +23,20 @@ import play.api.mvc.BodyParsers.parse
  * Time: 13:29
  *
  */
-object QuestionController extends Controller {
+object QuestionController extends Crud[Question, Questions] with Controller {
 
 
-  def add = DBAction(parse.json) {
+  def fetch(id: Long) = DBAction {implicit rs =>
+      fetchEntityById(Questions, id).map(entity => Ok(Json.toJson(entity))).getOrElse(BadRequest)
+  }
 
+  def fetchAll = DBAction({
     implicit rs =>
+      Ok(Json.toJson(fetchAllEntities(Questions)))
+  })
+
+
+  def add = DBAction(parse.json) {implicit rs =>
 
       val question = rs.request.body.validate[Question]
 
@@ -43,8 +51,7 @@ object QuestionController extends Controller {
 
   }
 
-  def update(id: Long) = DBAction(parse.json) {
-    implicit rs =>
+  def update(id: Long) = DBAction(parse.json) {implicit rs =>
 
 
 
@@ -63,25 +70,20 @@ object QuestionController extends Controller {
 
   }
 
-  def delete(id: Long) = DBAction {
-    implicit rs =>
 
-      val affectedRows = Query(Questions).where(_.id === id).delete
+  def delete(id: Long) = DBAction {implicit rs =>
 
-      affectedRows match {
-        case 0 => BadRequest(Json.toJson(new SimpleResponse(s"Unable to delete question the id [$id] was not found in the database")))
-        case 1 => Ok(Json.toJson(new SimpleResponse(s"Question $id deleted. rows affected : $affectedRows")))
-        case _ => BadRequest(Json.toJson(new SimpleResponse(s"Unable to delete question. Error [$affectedRows]")))
+      val deletedRows =    deleteEntity(Questions, id)
 
-      }
+    deletedRows match{
+         case 0 => BadRequest(Json.toJson(new SimpleResponse(s"Unable to delete question the id [$id] was not found in the database")))
+         case 1 => Ok(Json.toJson(new SimpleResponse(s"Question $id deleted. rows affected : 1")))
+         case err => BadRequest(Json.toJson(new SimpleResponse(s"Unable to delete question. Error [$err]")))
 
+    }
 
   }
 
-  def list = DBAction {
-    implicit rs =>
-      Ok(Json.toJson(Query(Questions).filter(_.id > 0L).list()))
-  }
-
+ 
 
 }

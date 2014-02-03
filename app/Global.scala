@@ -1,14 +1,11 @@
 
 
 
-import anorm.Column
 import models.{Language,Domain,DifficultyLevel,ResponseSatisfactionLevel,Question}
 import play.api._
 import models.models._
 import play.api.db.slick._
 import play.api.Play.current
-import scala.slick.jdbc
-import scala.slick.jdbc.StaticQuery
 import scala.slick.lifted.Query
 
 import play.api.db.slick.Config.driver.simple._
@@ -82,9 +79,13 @@ object Global extends GlobalSettings {
         if( Query(Questions).filter(_.id > 0L).list.size < 1){
 
           Questions.autoInc.insertAll(
-            new Question(None, "q", "a", 1l, 1l, None, 0, None)
+            new Question(None, "q", "a", 1l, 1l, None, 0, None),
+            new Question(None, "q", "a", 2l, 2l, None, 0, None),
+          new Question(None, "q", "a", 3l, 3l, None, 0, None)
           )
         }
+
+
 
 
 

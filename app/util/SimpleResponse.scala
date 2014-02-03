@@ -1,7 +1,5 @@
 package util
 
-import play.api.libs.json.Json
-import models.Question
 
 /**
  * Created with IntelliJ IDEA.
@@ -11,6 +9,6 @@ import models.Question
  *
  */
 case class SimpleResponse(message:String) {
-
+  override def toString: String = s"""{"message" : "$message"}"""
 }
 

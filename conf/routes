@@ -8,7 +8,13 @@ GET           /                         controllers.Application.index
 # Map static resources from the /public folder to the /assets URL path
 GET           /assets/*file             controllers.Assets.at(path="/public", file)
 
-POST          /api/questions            controllers.QuestionController.add
-PUT           /api/questions/:id        controllers.QuestionController.update(id:Long)
-GET           /api/questions            controllers.QuestionController.list
-DELETE        /api/questions/:id        controllers.QuestionController.delete(id:Long)
+#Questions
+POST            /api/questions              controllers.QuestionController.add
+PUT             /api/questions/:id          controllers.QuestionController.update(id:Long)
+GET             /api/questions              controllers.QuestionController.fetchAll
+GET             /api/questions/:id          controllers.QuestionController.fetch(id:Long)
+DELETE          /api/questions/:id          controllers.QuestionController.delete(id:Long)
+
+
+#InterviewSessions
+POST            /api/interview              controllers.InterviewSessionController.newSession

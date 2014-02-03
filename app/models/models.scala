@@ -29,7 +29,7 @@ object models {
 
 
 import play.api.db.slick.Config.driver.simple._
-trait AutoIncrementable[T] extends Table[T]{
+trait AutoIncrementable[T <: AnyRef { val id: Option[Long] }] extends Table[T]{
 
 
   def id:Column[Long] = column[Long]("ID", O.AutoInc, O.PrimaryKey)
